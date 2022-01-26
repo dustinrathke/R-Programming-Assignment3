@@ -5,10 +5,15 @@ best <- function(state, outcome) {
   
   ## Check that state and outcome are valid
   validOutcome = c("heart attack","heart failure","pneumonia")
-  if (!outcome %in% validOutcome) { stop("invalid outcome")}
+  if (!outcome %in% validOutcome) {
+    stop("invalid outcome")
+    }
   
   validState = unique(data[,7])
-  if (!state %in% validState) stop("invalid state")
+  if (!state %in% validState) {
+    
+    stop("invalid state")
+    }
   
   ## convert outcome name into column name
   fullColName <- c("Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack", "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure", "Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia")
@@ -16,6 +21,6 @@ best <- function(state, outcome) {
   
   ## Return hospital name in that state with lowest 30-day death rate
   data.state <- data[data$State==state,]
-  idx <- which.min(as.double(data.state[,colName]))
-  data.state[idx,"Hospital.Name"]
+  least <- which.min(as.double(data.state[,colName]))
+  data.state[least,"Hospital.Name"]
 }
